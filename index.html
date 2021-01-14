@@ -1,17 +1,259 @@
 <html>
 	<head>
-		<title>Send Pager</title>
+		<title>VIZ PAGER</title>
+
+		<!-- Favorite icon -->
 		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
-		<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+		<!-- Bootstrap -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+		<!-- jQuery -->
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+
+		<!-- reset viewport -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
-	<body style="background-color: #36acbb; margin: 0;">
-		<br>
-		<br>
-		<center>
-			<div style="font-family: 'Bebas Neue', cursive; font-size: 60px; color: #fff;">
-				TAP TO OPEN PAGER
+	<body>
+		<div class="container">
+			<br>
+			<h1>VIZ PAGER</h1>
+			<form>
+				<div class="form-group">
+					<label for="age">Age:</label>
+					<input type="tel" id="age" class="form-control" maxlength="3">
+				</div>
 				<br>
-				<a href='sms:555555&body=Hello World!'><img src="red_button.jpg" style="height: 80vh;" border="0"></a>
-			</div>
+				<div class="form-group">
+					<label for="gender">Gender:</label>
+					<div class="row">
+						<div class="col">
+							<div class="d-grid gap-2">
+								<button class="btn btn-outline-secondary form-control" type="button" id="genderMale" onclick="setMaleSelected();">Male</button>
+							</div>
+						</div>
+						<div class="col">
+							<div class="d-grid gap-2">
+								<button class="btn btn-outline-secondary form-control" type="button" id="genderFemale" onclick="setFemaleSelected();">Female</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="form-group">
+					<label for="lkw">LKW:</label>
+					<div class="row">
+						<div class="col">
+							<div class="d-grid gap-2">
+								<button class="btn btn-outline-secondary form-control" type="button" id="lkwKnown" onclick="setLkwKnown();">Known</button>
+							</div>
+						</div>
+						<div class="col">
+							<div class="d-grid gap-2">
+								<button class="btn btn-outline-secondary form-control active" type="button" id="lkwUnknown" onclick="setLkwUnknown();">Unknown</button>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div id="lkw" class="input-group mb-3">
+							<select class="form-select" id="lkwHour" disabled="">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12" selected>12</option>
+							</select>
+							<span class="input-group-text" id="basic-addon2"> : </span>
+							<select class="form-select" id="lkwMinute" disabled="">
+								<option value="00">00</option>
+								<option value="01">01</option>
+								<option value="02">02</option>
+								<option value="03">03</option>
+								<option value="04">04</option>
+								<option value="05">05</option>
+								<option value="06">06</option>
+								<option value="07">07</option>
+								<option value="08">08</option>
+								<option value="09">09</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+								<option value="13">13</option>
+								<option value="14">14</option>
+								<option value="15">15</option>
+								<option value="16">16</option>
+								<option value="17">17</option>
+								<option value="18">18</option>
+								<option value="19">19</option>
+								<option value="20">20</option>
+								<option value="21">21</option>
+								<option value="22">22</option>
+								<option value="23">23</option>
+								<option value="24">24</option>
+								<option value="25">25</option>
+								<option value="26">26</option>
+								<option value="27">27</option>
+								<option value="28">28</option>
+								<option value="29">29</option>
+								<option value="30">30</option>
+								<option value="31">31</option>
+								<option value="32">32</option>
+								<option value="33">33</option>
+								<option value="34">34</option>
+								<option value="35">35</option>
+								<option value="36">36</option>
+								<option value="37">37</option>
+								<option value="38">38</option>
+								<option value="39">39</option>
+								<option value="40">40</option>
+								<option value="41">41</option>
+								<option value="42">42</option>
+								<option value="43">43</option>
+								<option value="44">44</option>
+								<option value="45">45</option>
+								<option value="46">46</option>
+								<option value="47">47</option>
+								<option value="48">48</option>
+								<option value="49">49</option>
+								<option value="50">50</option>
+								<option value="51">51</option>
+								<option value="52">52</option>
+								<option value="53">53</option>
+								<option value="54">54</option>
+								<option value="55">55</option>
+								<option value="56">56</option>
+								<option value="57">57</option>
+								<option value="58">58</option>
+								<option value="59">59</option>
+							</select>
+							<select class="form-select" id="lkwPeriod" disabled="">
+								<option value ="AM">AM</option>
+								<option value="PM">PM</option>
+							</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="raceScore">RACE Score:</label>
+					<select class="form-select" id="raceScore">
+						<option value=""></option>
+						<option value="0">0</option>
+						<option value="1">1</option>
+						<option value ="2">2</option>
+						<option value="3">3</option>
+						<option value ="4">4</option>
+						<option value="5">5</option>
+						<option value ="6">6</option>
+						<option value="7">7</option>
+						<option value ="8">8</option>
+						<option value="9">9</option>
+					</select>
+				</div>
+				<br>
+				<div class="form-group">
+					<label for="eta">ETA:</label>
+					<div class="input-group mb-3">
+						<input type="tel" class="form-control" id="eta" maxlength="3">
+						<span class="input-group-text" id="basic-addon2"> minutes</span>
+					</div>
+				</div>
+				<br>
+				<div class="d-grid gap-2">
+					<button type="button" class="btn btn-danger btn-lg" onclick="createTextMessage();">SEND PAGER</button>
+				</div>
+			</form>
+		</div>
+		<script>
+			function setMaleSelected() {
+				$('#genderMale').addClass("active");
+				$('#genderFemale').removeClass("active");
+			}
+
+			function setFemaleSelected() {
+				$('#genderFemale').addClass("active");
+				$('#genderMale').removeClass("active");
+			}
+
+			function setLkwKnown() {
+				$("#lkwHour").prop("disabled", false);
+				$("#lkwMinute").prop("disabled", false);
+				$("#lkwPeriod").prop("disabled", false);
+
+				$('#lkwKnown').addClass("active");
+				$('#lkwUnknown').removeClass("active");
+			}
+
+			function setLkwUnknown() {
+				$("#lkwHour").prop("disabled", true);
+				$("#lkwMinute").prop("disabled", true);
+				$("#lkwPeriod").prop("disabled", true);
+
+				$("#lkwUnknown").addClass("active");
+				$("#lkwKnown").removeClass("active");
+			}
+
+			function isElementActive(elementSelector) {
+				return $(elementSelector).hasClass("active");
+			}
+
+			function createTextMessage() {
+				var pagerPhoneNumber = "+97255123456789";
+				var smsUrlPrefix = "sms:"
+				var body = "";
+
+				var SMS_NEWLINE_CHARACTER = "%0D%0A";
+
+				var age = $("#age").val();
+
+				if(age) {
+					body += "Age: " + age + "y" + SMS_NEWLINE_CHARACTER;
+				}
+
+				if(isElementActive("#genderMale")) {
+					body += "Gender: Male" + SMS_NEWLINE_CHARACTER;
+				} else if(isElementActive("#genderFemale")) {
+					body += "Gender: Female" + SMS_NEWLINE_CHARACTER;
+				}
+
+				if(isElementActive("#lkwKnown")) {
+					var lkwHour = $("#lkwHour").val();
+					var lkwMinute = $("#lkwMinute").val();
+					var lkwPeriod = $("#lkwPeriod").val();
+
+					body += "LKW: " + lkwHour + ":" + lkwMinute + lkwPeriod + SMS_NEWLINE_CHARACTER;
+				}
+
+				var raceScore = $("#raceScore").val();
+				if(raceScore) {
+					body += "RACE Score: " + raceScore + SMS_NEWLINE_CHARACTER;
+				}
+
+				var eta = $("#eta").val();
+				if(eta) {
+					body += "ETA: " + eta + " minutes";
+				}
+
+				var currentUrl = window.location;
+
+				var newUrl = smsUrlPrefix + pagerPhoneNumber + "&body=" + body;
+
+				console.log(newUrl);
+				
+				window.location = newUrl;
+
+				// reset form
+				setTimeout(function() {
+					window.location = currentUrl;
+				}, 1000)
+			}			
+		</script>
 	</body>
 </html>
