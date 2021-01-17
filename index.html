@@ -172,6 +172,13 @@
 			</form>
 		</div>
 		<script>
+			function getUrlParameters() {
+				var currentUrl = new URL(window.location.href);
+				var params = new URLSearchParams(currentUrl.search.slice(1));
+
+				return params;
+			}
+
 			function setMaleSelected() {
 				$('#genderMale').addClass("active");
 				$('#genderFemale').removeClass("active");
@@ -204,9 +211,7 @@
 				return $(elementSelector).hasClass("active");
 			}
 
-			function createTextMessage() {
-				var pagerPhoneNumber = "+17069204686";
-				var smsUrlPrefix = "sms:"
+			function createTextMessageBody() {
 				var body = "";
 
 				var SMS_NEWLINE_CHARACTER = "%0D%0A";
@@ -241,9 +246,38 @@
 					body += "ETA: " + eta + " minutes";
 				}
 
-				var currentUrl = window.location;
+				return body;
+			}
 
-				var newUrl = smsUrlPrefix + pagerPhoneNumber + "&body=" + body;
+			function isAndroidDevice() {
+				var userAgent = navigator.userAgent.toLowerCase();
+				return (userAgent.indexOf("android") > -1); 
+			}
+
+			function createTextMessage() {
+				var urlParameters = params = getUrlParameters();
+				var pagerPhoneNumber = urlParameters.get("pagerPhoneNumber");
+
+				var body = createTextMessageBody();
+
+				var newUrl = "sms:";
+				if(pagerPhoneNumber) {
+					newUrl += pagerPhoneNumber;
+				}
+
+				if(body) {
+					// Android and iOS use different delimiters for the SMS message body
+					if(isAndroidDevice()) {
+						newUrl += "?"
+					} else {
+						newUrl += "&"
+					}
+
+					newUrl += "body=" + body;
+				}
+
+				// save the current URL to allow to navigate back to it in order to refresh and clear the page
+				var currentUrl = window.location;
 
 				console.log(newUrl);
 				
