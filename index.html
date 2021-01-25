@@ -211,15 +211,28 @@
 				return $(elementSelector).hasClass("active");
 			}
 
+			function getHipaaCompliantAge(age) {
+				if(!age) {
+					return age;
+				}
+
+				var YEAR_SUFFIX = "y";
+
+				if(age < 90) {
+					return age + YEAR_SUFFIX;
+				}
+
+				return "90" + YEAR_SUFFIX + "+";
+			}
+
 			function createTextMessageBody() {
 				var body = "";
 
 				var SMS_NEWLINE_CHARACTER = "%0D%0A";
 
-				var age = $("#age").val();
-
-				if(age) {
-					body += "Age: " + age + "y" + SMS_NEWLINE_CHARACTER;
+				var hippaCompliantAge = getHipaaCompliantAge($("#age").val());
+				if(hippaCompliantAge) {
+					body += "Age: " + hippaCompliantAge + SMS_NEWLINE_CHARACTER;
 				}
 
 				if(isElementActive("#genderMale")) {
