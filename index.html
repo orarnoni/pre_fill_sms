@@ -167,7 +167,7 @@
 				</div>
 				<br>
 				<div class="d-grid gap-2">
-					<button type="button" class="btn btn-danger btn-lg" onclick="createTextMessage();">SEND PAGER</button>
+					<button type="button" class="btn btn-danger btn-lg" onclick="reportEmergencyPatient();">SEND PAGER</button>
 				</div>
 			</form>
 		</div>
@@ -267,39 +267,72 @@
 				return (userAgent.indexOf("android") > -1); 
 			}
 
-			function createTextMessage() {
-				var urlParameters = params = getUrlParameters();
-				var pagerPhoneNumber = urlParameters.get("pagerPhoneNumber");
-
-				var body = createTextMessageBody();
-
-				var newUrl = "sms:";
-				if(pagerPhoneNumber) {
-					newUrl += pagerPhoneNumber;
-				}
-
-				if(body) {
-					// Android and iOS use different delimiters for the SMS message body
-					if(isAndroidDevice()) {
-						newUrl += "?"
-					} else {
-						newUrl += "&"
-					}
-
-					newUrl += "body=" + body;
-				}
-
+			function safeOpenUrl(url) {
 				// save the current URL to allow to navigate back to it in order to refresh and clear the page
 				var currentUrl = window.location;
 
-				console.log(newUrl);
+				console.log(url);
 				
-				window.location = newUrl;
+				window.location = url;
 
 				// reset form
 				setTimeout(function() {
 					window.location = currentUrl;
-				}, 1000)
+				}, 1000);
+			}
+
+			function generateTextMessage(destination) {
+				var url = "sms:";
+
+				url += destination;
+
+				var body = createTextMessageBody();
+				if(body) {
+					// Android and iOS use different delimiters for the SMS message body
+					if(isAndroidDevice()) {
+						url += "?"
+					} else {
+						url += "&"
+					}
+
+					url += "body=" + body;
+				}
+
+				safeOpenUrl(url);
+			}
+
+			function generateEmail(destination) {
+				var url = "mailto:"
+
+				url += destination;
+
+				url += "?subject=" + encodeURI("New Emergency Patient");
+
+				var body = createTextMessageBody();
+				if(body) {
+					url += "&body=" + body;
+				}
+
+				safeOpenUrl(url);
+			}
+
+			function reportEmergencyPatient() {
+				var urlParameters = params = getUrlParameters();
+				var pagerType = urlParameters.get("pagerType");
+
+				var pagerDestination = urlParameters.get("pagerDestination");
+
+				if(pagerType && (pagerType.toLowerCase() == "email")) {
+					generateEmail(pagerDestination);
+				} else {
+					// backward compatibility from previous versions
+					var pagerPhoneNumber = urlParameters.get("pagerPhoneNumber");
+					if(pagerPhoneNumber) {
+						pagerDestination = pagerPhoneNumber;
+					}
+
+					generateTextMessage(pagerDestination);
+				}
 			}			
 		</script>
 	</body>
