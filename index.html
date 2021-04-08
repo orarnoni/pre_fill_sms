@@ -52,7 +52,7 @@
 						</div>
 						<div class="col">
 							<div class="d-grid gap-2">
-								<button class="btn btn-outline-secondary form-control active" type="button" id="lkwUnknown" onclick="setLkwUnknown();">Unknown</button>
+								<button class="btn btn-outline-secondary form-control" type="button" id="lkwUnknown" onclick="setLkwUnknown();">Unknown</button>
 							</div>
 						</div>
 					</div>
@@ -247,6 +247,8 @@
 					var lkwPeriod = $("#lkwPeriod").val();
 
 					body += "LKW: " + lkwHour + ":" + lkwMinute + lkwPeriod + SMS_NEWLINE_CHARACTER;
+				} else if(isElementActive("#lkwUnknown")) {
+					body += "LKW: Unknown" + SMS_NEWLINE_CHARACTER;
 				}
 
 				var raceScore = $("#raceScore").val();
@@ -284,7 +286,9 @@
 			function generateTextMessage(destination) {
 				var url = "sms:";
 
-				url += destination;
+				if(destination) {
+					url += destination;
+				}
 
 				var body = createTextMessageBody();
 				if(body) {
